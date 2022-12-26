@@ -37,10 +37,10 @@ void loop() {
 //  Serial.print(ax_m_s2); Serial.print("\t");
 //  Serial.print(ay_m_s2);Serial.print("\t");
 // Serial.print(az_m_s2); Serial.print("\t");
-//  Serial.print(gx_deg_s);  Serial.print("\t");
-//  Serial.print(gy_deg_s);  Serial.print("\t");
- Serial.print(gz_deg_s);
- //Serial.print("\t");
+  Serial.print(gx_deg_s);  Serial.print("\t");
+  Serial.print(gy_deg_s);  Serial.print("\t");
+  Serial.print(gz_deg_s);
+ Serial.print("\t");
 Serial.println();
   delay(100);
 }
