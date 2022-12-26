@@ -45,7 +45,7 @@ void setup() {
   Serial.print(gx_o); Serial.print("\t"); 
   Serial.print(gy_o); Serial.print("\t");
   Serial.print(gz_o); Serial.print("\t");
-  Serial.println("nnEnvie cualquier caracter para empezar la calibracionnn");  
+  Serial.println("\n Envie cualquier caracter para empezar la calibracion:");  
   // Espera un caracter para empezar a calibrar
   while (true){if (Serial.available()) break;}  
   Serial.println("Calibrando, no mover IMU");  
