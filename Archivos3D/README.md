@@ -1,2 +1,2 @@
 
-En esta carpeta se encuentran los archivos para la impresión 3D de la rueda de reacción y del marco
+En esta carpeta se encuentran los archivos para la impresión 3D de la rueda de reacción y del marco, son archivos de Autodesk Inventor(extension .ipt).
