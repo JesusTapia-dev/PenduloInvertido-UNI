@@ -24,7 +24,7 @@ const double Kp = 0.5;  // Proportional gain
 const double Ki = 0.1;  // Integral gain
 const double Kd = 0.01; // Derivative gain
 
-double Setpoint=30, Input, Output;
+double Setpoint=21, Input, Output;
 double lastInput, lastError, integral;
 
 
@@ -64,5 +64,5 @@ void loop() {
     while(millis() - startTime < 3000){ESC.write(Output);}
     ESC.write(0);
     }
-  delay(100);
+  delay(50);
 }
