@@ -31,11 +31,12 @@ double lastInput, lastError, integral;
 void setup() {
   Serial.begin(57600);
   ESC.attach(pinPWM, 1000, 1600);
-  ESC.write(1000);
+  ESC.writeMicroseconds(1000);
   Wire.begin();           //Iniciando I2C  
   sensor.initialize(); 
   if (sensor.testConnection()) Serial.println("Sensor iniciado correctamente");
   else Serial.println("Error al iniciar el sensor");
+  delay(5000);
   tiempo_prev=millis();
 }
 
@@ -56,12 +57,13 @@ void loop() {
   lastError = error;
 
   unsigned long startTime=millis();
+  Serial.println(girosc_ang_z);
   if(Input<30){
-      while(millis() - startTime < 3000){ESC.write(0);}
+      while(millis() - startTime < 300){ESC.write(0);}
       ESC.write(Output); 
     }
    if(Input>30){
-    while(millis() - startTime < 3000){ESC.write(Output);}
+    while(millis() - startTime < 300){ESC.write(Output);}
     ESC.write(0);
     }
   delay(50);
