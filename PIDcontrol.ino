@@ -63,7 +63,7 @@ void loop() {
   ESC.write(Output);
   delay(50);
   
-  Serial << "Angulo: " << girosc_ang_z << " Control: " << Output <<  << " Error: " << error << '\n' ;
+  Serial << "Angulo: " << girosc_ang_z << " Control: " << Output << " Error: " << error << '\n' ;
   
   return;
 }
