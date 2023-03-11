@@ -21,7 +21,7 @@ const int pinPWM=6;//pin que enviara la señal al driver
 float m=0.15,g=9.81;//consideramos una masa de 150g
 
 //CONSTANTES PID
-const double Kp = 0.25;  // Proportional gain
+const double Kp = 0.75;  // Proportional gain
 const double Ki = 0.001;  // Integral gain
 const double Kd = 0.001; // Derivative gain
 
@@ -59,8 +59,9 @@ void loop() {
   Output = (Kp * error) + (Ki * integral) + Kd * derivative;
   lastError = error;
   
-  if(error < 0) Output = 0;
-  ESC.write(Output);
+  ESC.write(1300);
+  delay(50);
+  ESC.write(1300 + Output);
   delay(50);
   
   Serial << "Angulo: " << girosc_ang_z << " Control: " << Output << " Error: " << error << '\n' ;
