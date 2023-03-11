@@ -1,11 +1,12 @@
+template<class T> inline Print &operator <<(Print &obj, T arg) { obj.print(arg); return obj; }
+
 #include "I2Cdev.h"
 #include "MPU6050.h"
 #include "Wire.h"
 #include <Servo.h>
 
-Servo ESC;//Objeto para aumentar la velocidad de la rueda
+Servo ESC; //Objeto para aumentar la velocidad de la rueda
 
-//$$$$$$$$$$$$$$$$$$$ MPU 6050 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 MPU6050 sensor;
 
 // Valores RAW (sin procesar) del acelerometro y giroscopio en los ejes x,y,z
@@ -20,9 +21,9 @@ const int pinPWM=6;//pin que enviara la señal al driver
 float m=0.15,g=9.81;//consideramos una masa de 150g
 
 //CONSTANTES PID
-const double Kp = 0.5;  // Proportional gain
-const double Ki = 0.1;  // Integral gain
-const double Kd = 0.01; // Derivative gain
+const double Kp = 0.25;  // Proportional gain
+const double Ki = 0.001;  // Integral gain
+const double Kd = 0.001; // Derivative gain
 
 double Setpoint=21, Input, Output;
 double lastInput, lastError, integral;
@@ -46,25 +47,24 @@ void loop() {
   sensor.getRotation(&gx, &gy, &gz);
   dt = millis()-tiempo_prev;
   tiempo_prev=millis();
-  girosc_ang_z=(gz/131)*dt/1000.0 + girosc_ang_z_prev;
-  girosc_ang_z_prev=girosc_ang_z;
-  Input=girosc_ang_z;
+
+  girosc_ang_z = (gz/131)*dt/1000.0 + girosc_ang_z_prev;
+  girosc_ang_z_prev = girosc_ang_z;
+  Input = girosc_ang_z;
+
   //Trabajamos con la ley de control
   double error = Setpoint - Input;
-  integral += error*dt;
-  double derivative = (error - lastError)/dt;
-  Output = (Kp * error) + (Ki * integral) + (Kd * derivative);
+  integral += error;
+  double derivative = error - lastError;
+  Output = (Kp * error) + (Ki * integral) + Kd * derivative;
   lastError = error;
 
-  unsigned long startTime=millis();
-  Serial.println(girosc_ang_z);
-  if(Input<30){
-      while(millis() - startTime < 300){ESC.write(0);}
-      ESC.write(Output); 
-    }
-   if(Input>30){
-    while(millis() - startTime < 300){ESC.write(Output);}
-    ESC.write(0);
-    }
+  //if(Output > 1600) Output = 1600;
+  //if(Output < 1000) Output = 1000;
+  ESC.write(Output);
   delay(50);
+  
+  Serial << "Angulo: " << girosc_ang_z << " Control: " << Output <<  << " Error: " << error << '\n' ;
+  
+  return;
 }
