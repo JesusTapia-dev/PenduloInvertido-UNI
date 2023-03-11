@@ -58,9 +58,8 @@ void loop() {
   double derivative = error - lastError;
   Output = (Kp * error) + (Ki * integral) + Kd * derivative;
   lastError = error;
-
-  //if(Output > 1600) Output = 1600;
-  //if(Output < 1000) Output = 1000;
+  
+  if(error < 0) Output = 0;
   ESC.write(Output);
   delay(50);
   
