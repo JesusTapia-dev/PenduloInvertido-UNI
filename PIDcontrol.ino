@@ -40,11 +40,12 @@ void setup() {
 }
 
 void loop() {
+  // Modificacion1github
   // Leer las aceleraciones y velocidades angulares
   sensor.getAcceleration(&ax, &ay, &az);
   sensor.getRotation(&gx, &gy, &gz);
   dt = millis()-tiempo_prev;
-  tiempo_prev=millis();
+  
   girosc_ang_z=(gz/131)*dt/1000.0 + girosc_ang_z_prev;
   girosc_ang_z_prev=girosc_ang_z;
   Input=girosc_ang_z;
