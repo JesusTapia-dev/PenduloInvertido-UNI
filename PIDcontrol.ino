@@ -6,7 +6,7 @@ template<class T> inline Print &operator <<(Print &obj, T arg) { obj.print(arg);
 #include <Servo.h>
 
 Servo ESC; //Objeto para aumentar la velocidad de la rueda
-
+//PROBANDO PULL RQUEST
 MPU6050 sensor;
 
 // Valores RAW (sin procesar) del acelerometro y giroscopio en los ejes x,y,z
