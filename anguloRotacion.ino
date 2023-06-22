@@ -45,7 +45,7 @@ void loop() {
   ang_y_prev=ang_y;
 
   //Mostrar los angulos separadas por un [tab]
-
+// Recordar que los angulos de rotación son considerando la posicion de calibracion 
   Serial.print("Rotacion en X:  ");
   Serial.print(ang_x); 
   Serial.print("tRotacion en Y: ");
